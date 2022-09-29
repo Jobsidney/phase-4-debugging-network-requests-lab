@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,setErrors } from "react";
 
 function ToyForm({ onAddToy }) {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
   });
+  const [errors, setErrors] = useState([]);
 
   function handleChange(event) {
     setFormData({
@@ -13,7 +14,7 @@ function ToyForm({ onAddToy }) {
     });
   }
 
-  function handleSubmit(event) {
+function handleSubmit(event) {
     event.preventDefault();
 
     const newToy = {
@@ -28,6 +29,17 @@ function ToyForm({ onAddToy }) {
       },
       body: JSON.stringify(newToy),
     })
+    // const data=await response.json()
+    // if(response.ok){
+    //   setFormData({
+    //         name: "",
+    //         image: "",
+    //       });
+    //       console.log(data);
+    // }
+    // else{
+    //   setErrors(data.errors)
+    // }
       .then((r) => r.json())
       .then((newToy) => {
         setFormData({
